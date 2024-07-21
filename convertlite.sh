@@ -1,4 +1,31 @@
 #!/bin/bash
+clear
+
+# Check if Homebrew is installed
+if ! command -v brew &> /dev/null; then
+  echo "Homebrew not found. Installing..."
+  sleep 1
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  sleep 2
+  clear
+else
+  echo "Homebrew is already installed."
+  sleep 2
+  clear
+fi
+
+# Check if ffmpeg is installed
+if ! command -v ffmpeg &> /dev/null; then
+  echo "ffmpeg not found. Installing..."
+  sleep 1
+  brew install ffmpeg
+  sleep 2
+  clear
+else
+  echo "ffmpeg is already installed."
+  sleep 2
+  clear
+fi
 
 # Current directory and conversion folder
 DIR="$(cd "$(dirname "$0")" && pwd)"
@@ -23,11 +50,11 @@ echo ""
 
 # Exit if no files found
 if ! $filesfound; then
-  echo "No convertable files found"
+  echo "No convertible files found"
   exit 0
 fi
 
-echo "Convertable files found"
+echo "Convertible files found"
 echo ""
 
 # Prompt user for conversion
